@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,9 +14,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
     </style>
 </head>
+
 <body>
     <div id="root"></div>
 
@@ -51,8 +56,8 @@
                 const lambda = (M + C + 180 + 102.9372) % 360;
                 const Jnoon = J2000 + n + 0.0053 * Math.sin(M * deg2rad) - 0.0069 * Math.sin(2 * lambda * deg2rad);
                 const dec = Math.asin(Math.sin(lambda * deg2rad) * Math.sin(23.44 * deg2rad)) / deg2rad;
-                const omega = Math.acos((Math.sin(-0.83 * deg2rad) - Math.sin(lat * deg2rad) * Math.sin(dec * deg2rad)) / 
-                                        (Math.cos(lat * deg2rad) * Math.cos(dec * deg2rad))) / deg2rad;
+                const omega = Math.acos((Math.sin(-0.83 * deg2rad) - Math.sin(lat * deg2rad) * Math.sin(dec * deg2rad)) /
+                    (Math.cos(lat * deg2rad) * Math.cos(dec * deg2rad))) / deg2rad;
                 const Jrise = Jnoon - omega / 360;
                 const Jset = Jnoon + omega / 360;
                 const riseTime = new Date(date);
@@ -129,12 +134,12 @@
 
             // --- Indian year (Samvatsara) and Uttarayan/Dakshinayan helpers ---
             const samvatsaraNames = [
-                'Prabhava','Vibhava','Shukla','Pramodutha','Prajothpatti','Angirasa','Shrimukha','Bhava','Yuva','Dhata',
-                'Isha','Vikrama','Vrisha','Chitrabhanu','Subhanu','Tarana','Parthiva','Vyaya','Sarvajit','Sarvadhari',
-                'Virodhi','Vikruti','Khara','Nandana','Vijaya','Jaya','Manmatha','Durmukha','Hemalamba','Vilambi',
-                'Vikala','Sharvari','Plava','Shubhakrit','Shobhakrit','Krodhi','Vishvavasu','Parabhava','Plavanga','Kilaka',
-                'Saumya','Sadharana','Virodhikrith','Paridhavi','Pramadi','Ananda','Raksasa','Nala','Pingala','Kalayukti',
-                'Siddharthi','Raudra','Durmati','Dundubhi','Rudhirodgari','Raktakshi','Krodhana','Akshaya','Naya','Purusottama'
+                'Prabhava', 'Vibhava', 'Shukla', 'Pramodutha', 'Prajothpatti', 'Angirasa', 'Shrimukha', 'Bhava', 'Yuva', 'Dhata',
+                'Isha', 'Vikrama', 'Vrisha', 'Chitrabhanu', 'Subhanu', 'Tarana', 'Parthiva', 'Vyaya', 'Sarvajit', 'Sarvadhari',
+                'Virodhi', 'Vikruti', 'Khara', 'Nandana', 'Vijaya', 'Jaya', 'Manmatha', 'Durmukha', 'Hemalamba', 'Vilambi',
+                'Vikala', 'Sharvari', 'Plava', 'Shubhakrit', 'Shobhakrit', 'Krodhi', 'Vishvavasu', 'Parabhava', 'Plavanga', 'Kilaka',
+                'Saumya', 'Sadharana', 'Virodhikrith', 'Paridhavi', 'Pramadi', 'Ananda', 'Raksasa', 'Nala', 'Pingala', 'Kalayukti',
+                'Siddharthi', 'Raudra', 'Durmati', 'Dundubhi', 'Rudhirodgari', 'Raktakshi', 'Krodhana', 'Akshaya', 'Naya', 'Purusottama'
             ];
 
             // Anchor mapping: index 0 corresponds to anchorYear's samvatsara = 'Prabhava'.
@@ -180,24 +185,6 @@
             // --- end helpers ---
             const samvatsara = getSamvatsara(time);
             const uttarDakshin = isUttarayan(time);
-// ...existing code...
-                             e('div', { className: 'bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 border-2 border-green-200' },
-                                 e('div', { className: 'flex items-center gap-2 mb-2' },
-                                     e('span', { className: 'text-xl' }, '📆'),
-                                     e('h3', { className: 'font-semibold text-green-800' }, 'Vaara: ')
-                                 ),
-                                 e('p', { className: 'text-xl font-bold text-green-900' }, time.toLocaleDateString('en-IN', { weekday: 'long' }))
-                             )
-                        ,
-                            e('div', { className: 'bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-4 border-2 border-yellow-200' },
-                                e('div', { className: 'flex items-center gap-2 mb-2' },
-                                    e('span', { className: 'text-xl' }, '🕉️'),
-                                    e('h3', { className: 'font-semibold text-yellow-800' }, 'Samvatsara / Ayanam: ')
-                                ),
-                                e('p', { className: 'text-lg font-semibold text-yellow-900 mb-1' }, samvatsara),
-                                e('p', { className: 'text-sm text-yellow-800' }, uttarDakshin)
-                            )
-// ...existing code...
             const getHinduMonth = (date) => {
                 const months = ['Chaitra', 'Vaishakha', 'Jyeshtha', 'Ashadha',
                     'Shravana', 'Bhadrapada', 'Ashwin', 'Kartik',
@@ -244,7 +231,7 @@
                                 e('input', {
                                     type: 'text',
                                     value: tempLocation.name,
-                                    onChange: (ev) => setTempLocation({...tempLocation, name: ev.target.value}),
+                                    onChange: (ev) => setTempLocation({ ...tempLocation, name: ev.target.value }),
                                     className: 'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500'
                                 })
                             ),
@@ -254,7 +241,7 @@
                                     type: 'number',
                                     step: '0.0001',
                                     value: tempLocation.lat,
-                                    onChange: (ev) => setTempLocation({...tempLocation, lat: parseFloat(ev.target.value)}),
+                                    onChange: (ev) => setTempLocation({ ...tempLocation, lat: parseFloat(ev.target.value) }),
                                     className: 'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500'
                                 })
                             ),
@@ -264,7 +251,7 @@
                                     type: 'number',
                                     step: '0.0001',
                                     value: tempLocation.lon,
-                                    onChange: (ev) => setTempLocation({...tempLocation, lon: parseFloat(ev.target.value)}),
+                                    onChange: (ev) => setTempLocation({ ...tempLocation, lon: parseFloat(ev.target.value) }),
                                     className: 'w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500'
                                 })
                             )
@@ -308,6 +295,15 @@
                             )
                         ),
                         e('div', { className: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4' },
+
+                            e('div', { className: 'bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-4 border-2 border-yellow-200' },
+                                e('div', { className: 'flex items-center gap-2 mb-2' },
+                                    e('span', { className: 'text-xl' }, '🕉️'),
+                                    e('h3', { className: 'font-semibold text-yellow-800' }, 'Samvatsara / Ayanam: ')
+                                ),
+                                e('p', { className: 'text-lg font-semibold text-yellow-900 mb-1' }, samvatsara),
+                                e('p', { className: 'text-sm text-yellow-800' }, uttarDakshin)
+                            ),
                             e('div', { className: 'bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4 border-2 border-purple-200' },
                                 e('div', { className: 'flex items-center gap-2 mb-2' },
                                     e('span', { className: 'text-xl' }, '🌙'),
@@ -392,4 +388,5 @@
         }
     </script>
 </body>
+
 </html>

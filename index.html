@@ -207,7 +207,7 @@
                         e('div', { className: 'text-center mb-6' },
                             e('div', { className: 'flex items-center justify-center gap-3 mb-4' },
                                 e('span', { className: 'text-4xl' }, '☀️'),
-                                e('h1', { className: 'text-2xl md:text-3xl font-bold text-orange-800' }, 'पञ्चाङ्ग घड़ी'),
+                                e('h1', { className: 'text-2xl md:text-3xl font-bold text-orange-800' }, 'Daily Panchang'),
                                 e('span', { className: 'text-4xl' }, '🌙')
                             ),
                             e('p', { className: 'text-sm text-gray-600' }, 'Indian Panchang Digital Clock')
@@ -224,14 +224,14 @@
                             e('div', { className: 'bg-gradient-to-br from-yellow-50 to-orange-100 rounded-xl p-4 border-2 border-orange-200' },
                                 e('div', { className: 'flex items-center gap-2 mb-2' },
                                     e('span', { className: 'text-2xl' }, '🌅'),
-                                    e('h3', { className: 'font-semibold text-orange-800' }, 'Sunrise (सूर्योदय)')
+                                    e('h3', { className: 'font-semibold text-orange-800' }, 'Sunrise: ')
                                 ),
                                 e('p', { className: 'text-2xl font-bold text-orange-900' }, formatTime(sunTimes.sunrise))
                             ),
                             e('div', { className: 'bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl p-4 border-2 border-indigo-200' },
                                 e('div', { className: 'flex items-center gap-2 mb-2' },
                                     e('span', { className: 'text-2xl' }, '🌆'),
-                                    e('h3', { className: 'font-semibold text-indigo-800' }, 'Sunset (सूर्यास्त)')
+                                    e('h3', { className: 'font-semibold text-indigo-800' }, 'Sunset: ')
                                 ),
                                 e('p', { className: 'text-2xl font-bold text-indigo-900' }, formatTime(sunTimes.sunset))
                             )
@@ -240,42 +240,42 @@
                             e('div', { className: 'bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4 border-2 border-purple-200' },
                                 e('div', { className: 'flex items-center gap-2 mb-2' },
                                     e('span', { className: 'text-xl' }, '🌙'),
-                                    e('h3', { className: 'font-semibold text-purple-800' }, 'Tithi (तिथि)')
+                                    e('h3', { className: 'font-semibold text-purple-800' }, 'Tithi: ')
                                 ),
                                 e('p', { className: 'text-xl font-bold text-purple-900' }, `${tithi.paksha} ${tithi.name}`)
                             ),
                             e('div', { className: 'bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 border-2 border-blue-200' },
                                 e('div', { className: 'flex items-center gap-2 mb-2' },
                                     e('span', { className: 'text-xl' }, '⭐'),
-                                    e('h3', { className: 'font-semibold text-blue-800' }, 'Nakshatra (नक्षत्र)')
+                                    e('h3', { className: 'font-semibold text-blue-800' }, 'Nakshatra: ')
                                 ),
                                 e('p', { className: 'text-xl font-bold text-blue-900' }, calculateNakshatra(time))
                             ),
                             e('div', { className: 'bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 border-2 border-orange-200' },
                                 e('div', { className: 'flex items-center gap-2 mb-2' },
                                     e('span', { className: 'text-xl' }, '📅'),
-                                    e('h3', { className: 'font-semibold text-orange-800' }, 'Maasa (मास)')
+                                    e('h3', { className: 'font-semibold text-orange-800' }, 'Maasa: ')
                                 ),
                                 e('p', { className: 'text-xl font-bold text-orange-900' }, getHinduMonth(time))
                             ),
                             e('div', { className: 'bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl p-4 border-2 border-pink-200' },
                                 e('div', { className: 'flex items-center gap-2 mb-2' },
                                     e('span', { className: 'text-xl' }, '☀️'),
-                                    e('h3', { className: 'font-semibold text-pink-800' }, 'Yoga (योग)')
+                                    e('h3', { className: 'font-semibold text-pink-800' }, 'Yoga: ')
                                 ),
                                 e('p', { className: 'text-xl font-bold text-pink-900' }, getYoga(time))
                             ),
                             e('div', { className: 'bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl p-4 border-2 border-indigo-200' },
                                 e('div', { className: 'flex items-center gap-2 mb-2' },
                                     e('span', { className: 'text-xl' }, '✨'),
-                                    e('h3', { className: 'font-semibold text-indigo-800' }, 'Karana (करण)')
+                                    e('h3', { className: 'font-semibold text-indigo-800' }, 'Karana: ')
                                 ),
                                 e('p', { className: 'text-xl font-bold text-indigo-900' }, getKarana(time))
                             ),
                             e('div', { className: 'bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 border-2 border-green-200' },
                                 e('div', { className: 'flex items-center gap-2 mb-2' },
                                     e('span', { className: 'text-xl' }, '📆'),
-                                    e('h3', { className: 'font-semibold text-green-800' }, 'Vaara (वार)')
+                                    e('h3', { className: 'font-semibold text-green-800' }, 'Vaara: ')
                                 ),
                                 e('p', { className: 'text-xl font-bold text-green-900' }, time.toLocaleDateString('en-IN', { weekday: 'long' }))
                             )
@@ -284,16 +284,16 @@
                     e('div', { className: 'bg-white rounded-3xl shadow-2xl p-6 md:p-8 mb-6 border-4 border-red-200' },
                         e('div', { className: 'flex items-center gap-2 mb-6' },
                             e('span', { className: 'text-2xl' }, '⏰'),
-                            e('h2', { className: 'text-2xl font-bold text-red-800' }, 'Inauspicious Timings (अशुभ समय)')
+                            e('h2', { className: 'text-2xl font-bold text-red-800' }, 'Inauspicious Timings: ')
                         ),
                         e('div', { className: 'grid grid-cols-1 md:grid-cols-2 gap-4' },
                             e('div', { className: 'bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-4 border-2 border-red-300' },
-                                e('h3', { className: 'font-semibold text-red-800 mb-2' }, 'Rahu Kaal (राहु काल)'),
+                                e('h3', { className: 'font-semibold text-red-800 mb-2' }, 'Rahu Kaal: '),
                                 e('p', { className: 'text-lg font-bold text-red-900' }, `${formatTime(rahuKaal.start)} - ${formatTime(rahuKaal.end)}`),
                                 e('p', { className: 'text-xs text-red-700 mt-1' }, 'Avoid starting new ventures')
                             ),
                             e('div', { className: 'bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-4 border-2 border-gray-300' },
-                                e('h3', { className: 'font-semibold text-gray-800 mb-2' }, 'Gulika Kaal (गुलिक काल)'),
+                                e('h3', { className: 'font-semibold text-gray-800 mb-2' }, 'Gulika Kaal: '),
                                 e('p', { className: 'text-lg font-bold text-gray-900' }, `${formatTime(gulikaKaal.start)} - ${formatTime(gulikaKaal.end)}`),
                                 e('p', { className: 'text-xs text-gray-700 mt-1' }, 'Inauspicious period')
                             )

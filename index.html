@@ -46,27 +46,49 @@
             }, [location]);
 
             const calculateSunTimes = (date, lat, lon) => {
-                const J2000 = 2451545.0;
-                const deg2rad = Math.PI / 180;
-                const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000);
-                const n = dayOfYear + (12 - date.getTimezoneOffset() / 60) / 24;
-                const J = J2000 + n;
-                const M = (357.5291 + 0.98560028 * (J - J2000)) % 360;
-                const C = 1.9148 * Math.sin(M * deg2rad) + 0.0200 * Math.sin(2 * M * deg2rad);
-                const lambda = (M + C + 180 + 102.9372) % 360;
-                const Jnoon = J2000 + n + 0.0053 * Math.sin(M * deg2rad) - 0.0069 * Math.sin(2 * lambda * deg2rad);
-                const dec = Math.asin(Math.sin(lambda * deg2rad) * Math.sin(23.44 * deg2rad)) / deg2rad;
-                const omega = Math.acos((Math.sin(-0.83 * deg2rad) - Math.sin(lat * deg2rad) * Math.sin(dec * deg2rad)) /
-                    (Math.cos(lat * deg2rad) * Math.cos(dec * deg2rad))) / deg2rad;
-                const Jrise = Jnoon - omega / 360;
-                const Jset = Jnoon + omega / 360;
-                const riseTime = new Date(date);
-                const setTime = new Date(date);
-                const riseHours = ((Jrise - J2000 - n) * 24 + 12) % 24;
-                const setHours = ((Jset - J2000 - n) * 24 + 12) % 24;
-                riseTime.setHours(Math.floor(riseHours), Math.round((riseHours % 1) * 60), 0);
-                setTime.setHours(Math.floor(setHours), Math.round((setHours % 1) * 60), 0);
-                return { sunrise: riseTime, sunset: setTime };
+                // const J2000 = 2451545.0;
+                //  const deg2rad = Math.PI / 180;
+                //  const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000);
+                //  const n = dayOfYear + (12 - date.getTimezoneOffset() / 60) / 24;
+                //  const J = J2000 + n;
+                //  const M = (357.5291 + 0.98560028 * (J - J2000)) % 360;
+                //  const C = 1.9148 * Math.sin(M * deg2rad) + 0.0200 * Math.sin(2 * M * deg2rad);
+                //  const lambda = (M + C + 180 + 102.9372) % 360;
+                //  const Jnoon = J2000 + n + 0.0053 * Math.sin(M * deg2rad) - 0.0069 * Math.sin(2 * lambda * deg2rad);
+                //  const dec = Math.asin(Math.sin(lambda * deg2rad) * Math.sin(23.44 * deg2rad)) / deg2rad;
+                //  const omega = Math.acos((Math.sin(-0.83 * deg2rad) - Math.sin(lat * deg2rad) * Math.sin(dec * deg2rad)) /
+                //      (Math.cos(lat * deg2rad) * Math.cos(dec * deg2rad))) / deg2rad;
+                //  const Jrise = Jnoon - omega / 360;
+                //  const Jset = Jnoon + omega / 360;
+                //  const riseTime = new Date(date);
+                //  const setTime = new Date(date);
+                //  const riseHours = ((Jrise - J2000 - n) * 24 + 12) % 24;
+                //  const setHours = ((Jset - J2000 - n) * 24 + 12) % 24;
+                //  riseTime.setHours(Math.floor(riseHours), Math.round((riseHours % 1) * 60), 0);
+                //  setTime.setHours(Math.floor(setHours), Math.round((setHours % 1) * 60), 0);
+                // Validate latitude and longitude
+                if (typeof lat !== 'number' || typeof lon !== 'number' ||
+                    lat < -90 || lat > 90 || lon < -180 || lon > 180) {
+                    throw new Error('Invalid latitude or longitude values.');
+                }
+
+                // API endpoint (returns UTC times)
+                const url = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&formatted=0`;
+
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+
+                const data = await response.json();
+                if (data.status !== 'OK') {
+                    throw new Error(`API error: ${data.status}`);
+                }
+
+                // Convert UTC times to local time
+                const sunriseLocal = new Date(data.results.sunrise).toLocaleTimeString();
+                const sunsetLocal = new Date(data.results.sunset).toLocaleTimeString();
+                return { sunrise: sunriseLocal, sunset: sunsetLocal };
             };
 
             const calculateTithi = (date) => {

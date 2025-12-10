@@ -66,7 +66,7 @@
                   const setHours = ((Jset - J2000 - n) * 24 + 12) % 24;
                   riseTime.setHours(Math.floor(riseHours), Math.round((riseHours % 1) * 60), 0);
                   setTime.setHours(Math.floor(setHours), Math.round((setHours % 1) * 60), 0);
-                return { sunrise: riseTime, sunset: riseTime };
+                return { sunrise: riseTime, sunset: setTime };
                //  Validate latitude and longitude
                 //if (typeof lat !== 'number' || typeof lon !== 'number' ||
                 //    lat < -90 || lat > 90 || lon < -180 || lon > 180) {
@@ -408,3 +408,4 @@
 
 
 </html>
+
